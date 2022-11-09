@@ -1,23 +1,43 @@
 const mongoose = require("mongoose");
 
-const UserScheme = new mongoose.Schema(
+const TrackSchema = new mongoose.Schema(
     {
         name:{
             type:String
         },
-        age:{
+        album:{
             type:Number
         },
-        email:{
+        cover:{
             type:String,
-            unique:true
+            validate:{
+                validator: (req)=>{
+                    return true;
+                },
+                message:"ERROR_URL"
+            }
         },
-        password:{
-            type:String
+        artist:{
+            name:{
+                type:String
+            },
+            nickname:{
+                type:String
+            },
+            nationality:{
+                type:String
+            }
         },
-        role:{
-            type:Boolean,
-            default:false
+        duration:{
+            start:{
+                type:Number
+            },
+            end:{
+                type:Number
+            }
+        },
+        mediId:{
+            type: mongoose.Types.ObjectId //fdebe conformar una especie de caracteres segun mongoose
         }
     },{
         timestamps:true,  // el creatAT,updateAT
@@ -25,4 +45,4 @@ const UserScheme = new mongoose.Schema(
     }
 )
 
-module.export = mongoose.model("users", UserScheme)
+module.export = mongoose.model("tracks", TrackSchema)

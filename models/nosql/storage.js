@@ -1,23 +1,12 @@
 const mongoose = require("mongoose");
 
-const UserScheme = new mongoose.Schema(
+const StorageSchema = new mongoose.Schema(
     {
-        name:{
+        url:{
             type:String
         },
-        age:{
+        filename:{
             type:Number
-        },
-        email:{
-            type:String,
-            unique:true
-        },
-        password:{
-            type:String
-        },
-        role:{
-            type:Boolean,
-            default:false
         }
     },{
         timestamps:true,  // el creatAT,updateAT 
@@ -25,4 +14,4 @@ const UserScheme = new mongoose.Schema(
     }
 )
 
-module.export = mongoose.model("users", UserScheme)
+module.export = mongoose.model("storages", StorageSchema)
