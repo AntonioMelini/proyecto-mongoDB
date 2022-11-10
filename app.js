@@ -1,12 +1,16 @@
 //mongodb+srv://antonio:Casaanto1@cluster0.jeyfg0g.mongodb.net/dbapi?retryWrites=true&w=majority
 require("dotenv").config();
-const expres=require("express");
+const express=require("express");
 const cors=require("cors");
 const dbConnect = require("./config/mongo");
+const router = require("./routes/index");
 
-const app = expres();
+const app = express();
 
 app.use(cors());
+app.use(express.json()); //que acepte el metodo post
+app.use(router);
+app.use(express.static("storage"))//que acepte los archivos que tenemos en storages para mostarlo en la web
 
 app.listen(process.env.PORT || 3000,()=>{
     console.log("aplicacion escuchando en el puerto `http://localhost:3000/`");

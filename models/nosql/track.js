@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const mongooseDelete= require("mongoose-delete");
 
 const TrackSchema = new mongoose.Schema(
     {
@@ -6,7 +7,7 @@ const TrackSchema = new mongoose.Schema(
             type:String
         },
         album:{
-            type:Number
+            type:String
         },
         cover:{
             type:String,
@@ -36,7 +37,7 @@ const TrackSchema = new mongoose.Schema(
                 type:Number
             }
         },
-        mediId:{
+        mediaId:{
             type: mongoose.Types.ObjectId //fdebe conformar una especie de caracteres segun mongoose
         }
     },{
@@ -44,5 +45,5 @@ const TrackSchema = new mongoose.Schema(
         versionKey:false
     }
 )
-
-module.export = mongoose.model("tracks", TrackSchema)
+TrackSchema.plugin(mongooseDelete,{overrideMethods:"all"})//sobreescribir los metodos que ya vienen nativos de mongoose de soft delete
+module.exports = mongoose.model("tracks", TrackSchema)
