@@ -27,17 +27,17 @@ const getItem = async(req,res)=>{
 
 const createItem=async(req,res)=>{
     try {
-        const  {file}=req
-        console.log(file);
+        const filename=req.file.filename
+        //console.log(req.file.filename);
         const fileData= {
-            filename: file.filename,
-            url: `${PUBLIC_URL}/${file.filename}`
+            filename: filename,
+            url: `${PUBLIC_URL}/${filename}`
         }
 
         const data= await storageModel.create(fileData)
         res.status(201).json({msg:"was created",data})
     } catch (error) {
-        handleHttpError(res,"ERROR_DELETE_ITEM",400)
+        handleHttpError(res,"ERROR_CREATE_ITEM",400)
     }
 }
 

@@ -9,7 +9,7 @@ const storageRouter=Router();
 
 storageRouter.get("/:id",validatorDeleteItem,getItem)
 storageRouter.get("/",getItems)
-storageRouter.post("/",uploadMiddleWare.single("my-photo"),validatorCreateItem,createItem)
+storageRouter.post("/",uploadMiddleWare.single("my-photo"),createItem)
 storageRouter.put("/:id",uploadMiddleWare.single("my-photo"),updateItem)
 storageRouter.delete("/:id",validatorDeleteItem,deleteItem)
 

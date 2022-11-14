@@ -10,7 +10,7 @@ const validatorCreateItem =[
         .notEmpty()
         .isURL(),
         (req,res,next)=>{
-            return validatorResults(req,res,nest)
+            return validatorResults(req,res,next)
         }
 ]
 

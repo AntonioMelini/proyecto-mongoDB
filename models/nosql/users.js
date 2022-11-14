@@ -13,7 +13,8 @@ const UserScheme = new mongoose.Schema(
             unique:true
         },
         password:{
-            type:String
+            type:String,
+            select:false  //no se muestra
         },
         role:{
             type:Boolean,

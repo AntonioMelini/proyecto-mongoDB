@@ -5,8 +5,22 @@ const {matchedData} =require("express-validator");
 
 const getItems = async (req,res)=>{
 try {
-    const data= await tracksModel.find({})
-    data.length ?     res.send({data}) : handleHttpError(res,"ERROR_GET_ITEMS",404)
+    const user=req.user
+    const data= await tracksModel.aggregate([
+        {
+            $lookup:{
+                from: "storages", //te relacionas con storages
+                localField:"mediaId",//en tracks vas a utilizar mediaId
+                foreignField: "_id",//mediaId va a tomar el valor de _id
+                as:"audio",
+            }
+        },
+        {
+            $unwind:"$audio"
+        }
+    ])
+    console.log(data);
+    data.length ?     res.send({data,user}) : res.send("EMPTY_FILE")
 
 } catch (error) {
     handleHttpError(res,"ERROR_GET_ITEMS")

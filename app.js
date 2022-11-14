@@ -4,6 +4,8 @@ const express=require("express");
 const cors=require("cors");
 const dbConnect = require("./config/mongo");
 const router = require("./routes/index");
+const { dbConnectMysql } = require("./config/mysql");
+const ENGINE_DB=process.env.ENGINE_DB
 
 const app = express();
 
@@ -16,5 +18,4 @@ app.listen(process.env.PORT || 3000,()=>{
     console.log("aplicacion escuchando en el puerto `http://localhost:3000/`");
 })
 
-
-dbConnect();
+ENGINE_DB==="mysql" ? dbConnectMysql() : dbConnect()
